@@ -14,7 +14,7 @@ class RedditAPI: RedditAPIService {
 
     static let shared = RedditAPI()
 
-    init(client: Client = UrlSessionClient()) {
+    private init(client: Client = UrlSessionClient()) {
         self.client = client
     }
 
@@ -22,7 +22,10 @@ class RedditAPI: RedditAPIService {
         let formattedString = RedditContansts.API.authURL
         let url = URL(string: formattedString)!
         let basicAuth = RedditContansts.API.Login.basicAuth
-        let header: (header: HeaderType, value: String) = (header: .authorization, value: basicAuth)
+        let header: (header: HeaderType, value: String) = (
+            header: .authorization,
+            value: basicAuth
+        )
         client.genericRequest(
             withType: TokenResponse.self,
             url: url,
@@ -43,22 +46,30 @@ class RedditAPI: RedditAPIService {
     func getPosts(limit: String, nextPageId: String, completion: @escaping (Result<[RedditPost], RedditError>) -> Void) {
         let formattedString = String(format:RedditContansts.API.topPostsURL, limit, nextPageId)
         let url = URL(string: formattedString)!
-        let header: (header: HeaderType, value: String) = (header: .authorization, value: "Bearer \(token)")
+        let header: (header: HeaderType, value: String) = (
+            header: .authorization,
+            value: "Bearer \(token)"
+        )
 
-        client.genericRequest(withType: PostResponse.self, url: url, method: .get, headers: [header], completion: { result in
-
-            switch result {
-            case .success(let postResponse):
-                let redditPosts = postResponse.data.children.compactMap{ $0.data }
-                completion(.success(redditPosts))
-            case .failure(let error):
-                completion(.failure(error))
+        client.genericRequest(
+            withType: PostResponse.self,
+            url: url, method: .get,
+            headers: [header],
+            completion: { result in
+                switch result {
+                case .success(let postResponse):
+                    let redditPosts = postResponse.data.children.compactMap{ $0.data }
+                    completion(.success(redditPosts))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
-        })
+        )
     }
 
 }
 
 protocol RedditAPIService {
     func getToken(completion: @escaping (Result<Void, RedditError>) -> Void)
+    func getPosts(limit: String, nextPageId: String, completion: @escaping (Result<[RedditPost], RedditError>) -> Void)
 }

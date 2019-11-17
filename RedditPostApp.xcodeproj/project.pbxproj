@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8E0659012381EE89006334CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659002381EE89006334CF /* AppDelegate.swift */; };
-		8E0659032381EE89006334CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659022381EE89006334CF /* ViewController.swift */; };
 		8E0659062381EE89006334CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0659042381EE89006334CF /* Main.storyboard */; };
 		8E0659082381EE8A006334CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0659072381EE8A006334CF /* Assets.xcassets */; };
 		8E06590B2381EE8A006334CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0659092381EE8A006334CF /* LaunchScreen.storyboard */; };
@@ -17,6 +16,18 @@
 		8E0659252381F10D006334CF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659242381F10D006334CF /* Client.swift */; };
 		8E0659282381F4C5006334CF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659272381F4C5006334CF /* Models.swift */; };
 		8E06592A2381F718006334CF /* RedditAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659292381F718006334CF /* RedditAPI.swift */; };
+		8E06593223820E84006334CF /* WelcomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06592C23820E84006334CF /* WelcomePresenter.swift */; };
+		8E06593323820E84006334CF /* WelcomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06592D23820E84006334CF /* WelcomeWorker.swift */; };
+		8E06593423820E84006334CF /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06592E23820E84006334CF /* WelcomeRouter.swift */; };
+		8E06593523820E84006334CF /* WelcomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06592F23820E84006334CF /* WelcomeModels.swift */; };
+		8E06593623820E84006334CF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593023820E84006334CF /* WelcomeViewController.swift */; };
+		8E06593723820E84006334CF /* WelcomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593123820E84006334CF /* WelcomeInteractor.swift */; };
+		8E06594023820EA3006334CF /* PostsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593A23820EA3006334CF /* PostsPresenter.swift */; };
+		8E06594123820EA3006334CF /* PostsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593B23820EA3006334CF /* PostsWorker.swift */; };
+		8E06594223820EA3006334CF /* PostsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593C23820EA3006334CF /* PostsRouter.swift */; };
+		8E06594323820EA3006334CF /* PostsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593D23820EA3006334CF /* PostsModels.swift */; };
+		8E06594423820EA3006334CF /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593E23820EA3006334CF /* PostsViewController.swift */; };
+		8E06594523820EA3006334CF /* PostsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E06593F23820EA3006334CF /* PostsInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +43,6 @@
 /* Begin PBXFileReference section */
 		8E0658FD2381EE89006334CF /* RedditPostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditPostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0659002381EE89006334CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8E0659022381EE89006334CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8E0659052381EE89006334CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E0659072381EE8A006334CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E06590A2381EE8A006334CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -44,6 +54,18 @@
 		8E0659242381F10D006334CF /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		8E0659272381F4C5006334CF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		8E0659292381F718006334CF /* RedditAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAPI.swift; sourceTree = "<group>"; };
+		8E06592C23820E84006334CF /* WelcomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePresenter.swift; sourceTree = "<group>"; };
+		8E06592D23820E84006334CF /* WelcomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWorker.swift; sourceTree = "<group>"; };
+		8E06592E23820E84006334CF /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
+		8E06592F23820E84006334CF /* WelcomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModels.swift; sourceTree = "<group>"; };
+		8E06593023820E84006334CF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		8E06593123820E84006334CF /* WelcomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInteractor.swift; sourceTree = "<group>"; };
+		8E06593A23820EA3006334CF /* PostsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPresenter.swift; sourceTree = "<group>"; };
+		8E06593B23820EA3006334CF /* PostsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsWorker.swift; sourceTree = "<group>"; };
+		8E06593C23820EA3006334CF /* PostsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRouter.swift; sourceTree = "<group>"; };
+		8E06593D23820EA3006334CF /* PostsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModels.swift; sourceTree = "<group>"; };
+		8E06593E23820EA3006334CF /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		8E06593F23820EA3006334CF /* PostsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,11 +107,11 @@
 		8E0658FF2381EE89006334CF /* RedditPostApp */ = {
 			isa = PBXGroup;
 			children = (
+				8E06592B23820E24006334CF /* Scene */,
 				8E0659262381F4B9006334CF /* Models */,
 				8E0659212381F012006334CF /* Helpers */,
 				8E0659202381F00A006334CF /* API */,
 				8E0659002381EE89006334CF /* AppDelegate.swift */,
-				8E0659022381EE89006334CF /* ViewController.swift */,
 				8E0659042381EE89006334CF /* Main.storyboard */,
 				8E0659072381EE8A006334CF /* Assets.xcassets */,
 				8E0659092381EE8A006334CF /* LaunchScreen.storyboard */,
@@ -130,6 +152,41 @@
 				8E0659272381F4C5006334CF /* Models.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8E06592B23820E24006334CF /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				8E06593923820E90006334CF /* Posts */,
+				8E06593823820E88006334CF /* Welcome */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		8E06593823820E88006334CF /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				8E06592C23820E84006334CF /* WelcomePresenter.swift */,
+				8E06592D23820E84006334CF /* WelcomeWorker.swift */,
+				8E06592E23820E84006334CF /* WelcomeRouter.swift */,
+				8E06592F23820E84006334CF /* WelcomeModels.swift */,
+				8E06593023820E84006334CF /* WelcomeViewController.swift */,
+				8E06593123820E84006334CF /* WelcomeInteractor.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		8E06593923820E90006334CF /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				8E06593A23820EA3006334CF /* PostsPresenter.swift */,
+				8E06593B23820EA3006334CF /* PostsWorker.swift */,
+				8E06593C23820EA3006334CF /* PostsRouter.swift */,
+				8E06593D23820EA3006334CF /* PostsModels.swift */,
+				8E06593E23820EA3006334CF /* PostsViewController.swift */,
+				8E06593F23820EA3006334CF /* PostsInteractor.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,10 +290,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E0659032381EE89006334CF /* ViewController.swift in Sources */,
+				8E06593423820E84006334CF /* WelcomeRouter.swift in Sources */,
+				8E06594123820EA3006334CF /* PostsWorker.swift in Sources */,
+				8E06594423820EA3006334CF /* PostsViewController.swift in Sources */,
+				8E06593623820E84006334CF /* WelcomeViewController.swift in Sources */,
 				8E0659012381EE89006334CF /* AppDelegate.swift in Sources */,
+				8E06594523820EA3006334CF /* PostsInteractor.swift in Sources */,
+				8E06593223820E84006334CF /* WelcomePresenter.swift in Sources */,
+				8E06594023820EA3006334CF /* PostsPresenter.swift in Sources */,
 				8E06592A2381F718006334CF /* RedditAPI.swift in Sources */,
+				8E06593323820E84006334CF /* WelcomeWorker.swift in Sources */,
+				8E06594323820EA3006334CF /* PostsModels.swift in Sources */,
+				8E06593523820E84006334CF /* WelcomeModels.swift in Sources */,
 				8E0659252381F10D006334CF /* Client.swift in Sources */,
+				8E06593723820E84006334CF /* WelcomeInteractor.swift in Sources */,
+				8E06594223820EA3006334CF /* PostsRouter.swift in Sources */,
 				8E0659232381F02D006334CF /* RedditConstants.swift in Sources */,
 				8E0659282381F4C5006334CF /* Models.swift in Sources */,
 			);
