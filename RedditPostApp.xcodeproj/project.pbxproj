@@ -13,6 +13,10 @@
 		8E0659082381EE8A006334CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0659072381EE8A006334CF /* Assets.xcassets */; };
 		8E06590B2381EE8A006334CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0659092381EE8A006334CF /* LaunchScreen.storyboard */; };
 		8E0659162381EE8B006334CF /* RedditPostAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659152381EE8B006334CF /* RedditPostAppTests.swift */; };
+		8E0659232381F02D006334CF /* RedditConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659222381F02D006334CF /* RedditConstants.swift */; };
+		8E0659252381F10D006334CF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659242381F10D006334CF /* Client.swift */; };
+		8E0659282381F4C5006334CF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659272381F4C5006334CF /* Models.swift */; };
+		8E06592A2381F718006334CF /* RedditAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0659292381F718006334CF /* RedditAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		8E0659112381EE8B006334CF /* RedditPostAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedditPostAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0659152381EE8B006334CF /* RedditPostAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPostAppTests.swift; sourceTree = "<group>"; };
 		8E0659172381EE8B006334CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E0659222381F02D006334CF /* RedditConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditConstants.swift; sourceTree = "<group>"; };
+		8E0659242381F10D006334CF /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		8E0659272381F4C5006334CF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		8E0659292381F718006334CF /* RedditAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,9 @@
 		8E0658FF2381EE89006334CF /* RedditPostApp */ = {
 			isa = PBXGroup;
 			children = (
+				8E0659262381F4B9006334CF /* Models */,
+				8E0659212381F012006334CF /* Helpers */,
+				8E0659202381F00A006334CF /* API */,
 				8E0659002381EE89006334CF /* AppDelegate.swift */,
 				8E0659022381EE89006334CF /* ViewController.swift */,
 				8E0659042381EE89006334CF /* Main.storyboard */,
@@ -94,6 +105,31 @@
 				8E0659172381EE8B006334CF /* Info.plist */,
 			);
 			path = RedditPostAppTests;
+			sourceTree = "<group>";
+		};
+		8E0659202381F00A006334CF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8E0659242381F10D006334CF /* Client.swift */,
+				8E0659292381F718006334CF /* RedditAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		8E0659212381F012006334CF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8E0659222381F02D006334CF /* RedditConstants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8E0659262381F4B9006334CF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8E0659272381F4C5006334CF /* Models.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +235,10 @@
 			files = (
 				8E0659032381EE89006334CF /* ViewController.swift in Sources */,
 				8E0659012381EE89006334CF /* AppDelegate.swift in Sources */,
+				8E06592A2381F718006334CF /* RedditAPI.swift in Sources */,
+				8E0659252381F10D006334CF /* Client.swift in Sources */,
+				8E0659232381F02D006334CF /* RedditConstants.swift in Sources */,
+				8E0659282381F4C5006334CF /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
