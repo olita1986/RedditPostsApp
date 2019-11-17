@@ -8,35 +8,40 @@
 
 import Foundation
 
-// MARK: - PostModel
+// MARK: - PostResponse
 struct PostResponse: Codable {
     let kind: String
-    let data: PostModelData
+    let data: PostResponseData
 }
 
-// MARK: - PostModelData
-struct PostModelData: Codable {
-    let children: [RedditPostData]
+// MARK: - PostResponseData
+struct PostResponseData: Codable {
+    let children: [Child]
+    let after: String
 }
 
 // MARK: - Child
-struct RedditPostData: Codable {
+struct Child: Codable {
     let kind: String
     let data: RedditPost
 }
 
 // MARK: - ChildData
 struct RedditPost: Codable {
-    let id, author: String
     let thumbnail: String
-    let name: String
     let created: Int
-    let title: String
+    let id: String
+    let author: String
     let numComments: Int
+    let url: String
 
     enum CodingKeys: String, CodingKey {
-        case id, author, thumbnail, name, created, title
+        case thumbnail
+        case created
+        case id
+        case author
         case numComments = "num_comments"
+        case url
     }
 }
 

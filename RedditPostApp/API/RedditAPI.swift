@@ -12,11 +12,13 @@ class RedditAPI: RedditAPIService {
     let client: Client
     var token: String = ""
 
+    static let shared = RedditAPI()
+
     init(client: Client = UrlSessionClient()) {
         self.client = client
     }
 
-    func getToken(completion: @escaping (Result<TokenResponse, RedditError>) -> Void) {
+    func getToken(completion: @escaping (Result<Void, RedditError>) -> Void) {
         let formattedString = RedditContansts.API.authURL
         let url = URL(string: formattedString)!
         let basicAuth = RedditContansts.API.Login.basicAuth
@@ -26,10 +28,11 @@ class RedditAPI: RedditAPIService {
             url: url,
             method: .post,
             headers: [header],
-            completion: { [unowned self] result in
+            completion: { [weak self] result in
                 switch result {
                 case .success(let tokenResponse):
-                    self.token = tokenResponse.accessToken
+                    self?.token = tokenResponse.accessToken
+                    completion(.success(()))
                 case .failure(let error):
                     completion(.failure(error))
                 }
@@ -37,16 +40,25 @@ class RedditAPI: RedditAPIService {
         )
     }
 
-    func getPosts(limit: String, nextPageId: String, completion: @escaping (Result<PostResponse, RedditError>) -> Void) {
+    func getPosts(limit: String, nextPageId: String, completion: @escaping (Result<[RedditPost], RedditError>) -> Void) {
         let formattedString = String(format:RedditContansts.API.topPostsURL, limit, nextPageId)
         let url = URL(string: formattedString)!
         let header: (header: HeaderType, value: String) = (header: .authorization, value: "Bearer \(token)")
 
-        client.genericRequest(withType: PostResponse.self, url: url, method: .get, headers: [header], completion: completion)
+        client.genericRequest(withType: PostResponse.self, url: url, method: .get, headers: [header], completion: { result in
+
+            switch result {
+            case .success(let postResponse):
+                let redditPosts = postResponse.data.children.compactMap{ $0.data }
+                completion(.success(redditPosts))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
 
 }
 
 protocol RedditAPIService {
-    func getToken(completion: @escaping (Result<TokenResponse, RedditError>) -> Void)
+    func getToken(completion: @escaping (Result<Void, RedditError>) -> Void)
 }
