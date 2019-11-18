@@ -29,7 +29,10 @@ class PostsPresenter: PostsPresentationLogic {
                 commentCount: "\($0.numComments) comment\($0.numComments > 1 ? "s" : "")"
             )
         }
-        let viewModel = Posts.RedditPosts.ViewModel(redditPosts: posts)
+        let viewModel = Posts.RedditPosts.ViewModel(
+            redditPosts: posts,
+            loadingCount: response.showLoadingRow ? 1 : 0
+        )
         viewController?.displayView(viewModel: viewModel)
     }
 }

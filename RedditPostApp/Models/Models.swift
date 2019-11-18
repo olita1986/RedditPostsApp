@@ -17,7 +17,7 @@ struct PostResponse: Codable {
 // MARK: - PostResponseData
 struct PostResponseData: Codable {
     let children: [Child]
-    let after: String
+    let after: String?
 }
 
 // MARK: - Child

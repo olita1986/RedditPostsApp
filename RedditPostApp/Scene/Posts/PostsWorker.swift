@@ -27,7 +27,7 @@ class PostsWorker {
                 switch result {
                 case .success(let postResponse):
                     let redditPosts = postResponse.data.children.compactMap{ $0.data }
-                    completion(.success((posts: redditPosts, nextPageId: postResponse.data.after)))
+                    completion(.success((posts: redditPosts, nextPageId: postResponse.data.after ?? "")))
                 case .failure(let error):
                     completion(.failure(error))
                 }

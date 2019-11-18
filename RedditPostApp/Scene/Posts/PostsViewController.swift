@@ -61,12 +61,16 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDataTableView()
-        let request = Posts.RedditPosts.Request(pageId: "")
-        interactor?.getPosts(request: request)
+        setupViews()
+        interactor?.getPosts()
     }
 
     // MARK: Helper Methods
+
+    private func setupViews() {
+        title = "Top Posts"
+        setupDataTableView()
+    }
 
     private func setupDataTableView() {
         postsTableView.dataSource = self
@@ -82,7 +86,8 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
     // MARK: VIP methods
 
     func displayView(viewModel: Posts.RedditPosts.ViewModel) {
-        redditPosts = viewModel.redditPosts
+        loadingCount = viewModel.loadingCount
+        redditPosts += viewModel.redditPosts
     }
 
 }
@@ -108,7 +113,9 @@ extension PostsViewController: UITableViewDataSource, UITableViewDataSourcePrefe
     }
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-
+        if indexPaths.contains(where: isLoadingCell) {
+            interactor?.getPosts()
+        }
     }
 
     func isLoadingCell(for indexPath: IndexPath) -> Bool {

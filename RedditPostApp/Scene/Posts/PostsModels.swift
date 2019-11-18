@@ -21,6 +21,7 @@ enum Posts {
         }
         struct Response {
             var rawPosts: [RedditPost]
+            var showLoadingRow: Bool
         }
         struct ViewModel {
             struct DisplayedRedditPost {
@@ -32,6 +33,7 @@ enum Posts {
             }
 
             let redditPosts: [DisplayedRedditPost]
+            let loadingCount: Int
         }
     }
 }
