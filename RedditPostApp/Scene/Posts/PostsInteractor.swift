@@ -13,6 +13,7 @@
 import UIKit
 
 protocol PostsBusinessLogic {
+    func getPosts(request: Posts.RedditPosts.Request)
 }
 
 protocol PostsDataStore {
@@ -20,6 +21,21 @@ protocol PostsDataStore {
 
 class PostsInteractor: PostsBusinessLogic, PostsDataStore {
     var presenter: PostsPresentationLogic?
-    var worker: PostsWorker?
+    var worker = PostsWorker()
 
+    var nextPageId = ""
+    var isFetchingPosts = false
+
+    func getPosts(request: Posts.RedditPosts.Request) {
+        worker.getPost(nextPageId: request.pageId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.nextPageId = response.nextPageId
+                let response = Posts.RedditPosts.Response(rawPosts: response.posts)
+                self?.presenter?.presentView(response: response)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

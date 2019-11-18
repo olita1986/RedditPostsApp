@@ -13,10 +13,23 @@
 import UIKit
 
 protocol PostsPresentationLogic {
+    func presentView(response: Posts.RedditPosts.Response)
 }
 
 class PostsPresenter: PostsPresentationLogic {
     weak var viewController: PostsDisplayLogic?
 
-
+    func presentView(response: Posts.RedditPosts.Response) {
+        let posts = response.rawPosts.map {
+            Posts.RedditPosts.ViewModel.DisplayedRedditPost(
+                author: $0.author,
+                created: "",
+                thumbnailURL: $0.url,
+                title: $0.title,
+                commentCount: "\($0.numComments) comment\($0.numComments > 1 ? "s" : "")"
+            )
+        }
+        let viewModel = Posts.RedditPosts.ViewModel(redditPosts: posts)
+        viewController?.displayView(viewModel: viewModel)
+    }
 }

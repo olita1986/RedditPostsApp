@@ -34,8 +34,10 @@ struct RedditPost: Codable {
     let author: String
     let numComments: Int
     let url: String
+    let title: String
 
     enum CodingKeys: String, CodingKey {
+        case title
         case thumbnail
         case created
         case id

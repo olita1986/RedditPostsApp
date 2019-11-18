@@ -13,6 +13,25 @@
 import UIKit
 
 class PostsWorker {
-    func doSomeWork() {
+    let apiService: RedditAPIService
+
+    init(apiService: RedditAPIService = RedditAPI.shared) {
+        self.apiService = apiService
+    }
+
+    func getPost(nextPageId: String, completion: @escaping (Result<(posts: [RedditPost], nextPageId: String), RedditError>) -> Void) {
+        apiService.getPosts(
+            limit: "15",
+            nextPageId: nextPageId,
+            completion: { result in
+                switch result {
+                case .success(let postResponse):
+                    let redditPosts = postResponse.data.children.compactMap{ $0.data }
+                    completion(.success((posts: redditPosts, nextPageId: postResponse.data.after)))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+        )
     }
 }

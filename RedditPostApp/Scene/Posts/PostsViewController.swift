@@ -13,12 +13,23 @@
 import UIKit
 
 protocol PostsDisplayLogic: class {
+    func displayView(viewModel: Posts.RedditPosts.ViewModel)
 }
 
 class PostsViewController: UIViewController, PostsDisplayLogic {
     var interactor: PostsBusinessLogic?
     var router: (NSObjectProtocol & PostsRoutingLogic & PostsDataPassing)?
 
+    @IBOutlet weak var postsTableView: UITableView!
+
+    var redditPosts: [Posts.RedditPosts.ViewModel.DisplayedRedditPost] = [] {
+        didSet {
+            postsTableView.reloadData()
+        }
+    }
+
+    var loadingCount = 0
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -50,6 +61,57 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDataTableView()
+        let request = Posts.RedditPosts.Request(pageId: "")
+        interactor?.getPosts(request: request)
     }
 
+    // MARK: Helper Methods
+
+    private func setupDataTableView() {
+        postsTableView.dataSource = self
+                postsTableView.prefetchDataSource = self
+        postsTableView.tableFooterView = UIView()
+        postsTableView.register(UINib(nibName: "RedditPostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
+        postsTableView.register(UINib(nibName: "LoadingTableViewCell", bundle: nil), forCellReuseIdentifier: "loadingCell")
+        postsTableView.estimatedRowHeight = 60
+        postsTableView.rowHeight = UITableView.automaticDimension
+    }
+
+
+    // MARK: VIP methods
+
+    func displayView(viewModel: Posts.RedditPosts.ViewModel) {
+        redditPosts = viewModel.redditPosts
+    }
+
+}
+
+extension PostsViewController: UITableViewDataSource, UITableViewDataSourcePrefetching {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return redditPosts.count + loadingCount
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if isLoadingCell(for: indexPath) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingTableViewCell
+            cell.startAnimating()
+            return cell
+        }
+
+        let post = redditPosts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! RedditPostTableViewCell
+
+        cell.setupCell(viewModel: post)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+
+    }
+
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= redditPosts.count
+    }
 }

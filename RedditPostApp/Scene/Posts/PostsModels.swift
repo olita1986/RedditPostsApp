@@ -15,12 +15,23 @@ import UIKit
 enum Posts {
     // MARK: Use cases
 
-    enum Something {
+    enum RedditPosts {
         struct Request {
+            var pageId: String
         }
         struct Response {
+            var rawPosts: [RedditPost]
         }
         struct ViewModel {
+            struct DisplayedRedditPost {
+                let author: String
+                let created: String
+                let thumbnailURL: String
+                let title: String
+                let commentCount: String
+            }
+
+            let redditPosts: [DisplayedRedditPost]
         }
     }
 }

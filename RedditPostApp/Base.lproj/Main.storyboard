@@ -101,6 +101,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Fc-28-7dR"/>
                     </view>
+                    <connections>
+                        <outlet property="postsTableView" destination="fqt-Xy-nex" id="rEn-jw-2cF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NCu-14-Sqy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
