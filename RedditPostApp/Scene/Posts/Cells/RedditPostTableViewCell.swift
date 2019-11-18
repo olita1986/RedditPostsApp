@@ -34,39 +34,46 @@ class RedditPostTableViewCell: UITableViewCell {
     }
 
 
-    private func downloadImage(withURL url: String) {
-        guard let url = URL(string: url) else {
-            return
-        }
-        var workItem: DispatchWorkItem?
-        workItem = DispatchWorkItem(block: {
-            guard let dispatchWorkItem = workItem, !dispatchWorkItem.isCancelled else {
-                workItem = nil
+    private func downloadImage(withURL urlString: String) {
+        if let data = RedditAPI.shared.cache.object(forKey: urlString as NSString) {
+            let image = UIImage(data: data as Data)
+            postImageView.image = image
+        } else {
+            guard let url = URL(string: urlString) else {
+                postImageView.image = #imageLiteral(resourceName: "placeholder")
                 return
             }
-
-            guard let data = try? Data(contentsOf: url) else {
-                return
-            }
-            let image = UIImage(data: data)
-
-            if let workItem = workItem, !workItem.isCancelled {
-                DispatchQueue.main.async {
-                    // Configure Thumbnail Image View
-                    self.postImageView.image = image
+            var workItem: DispatchWorkItem?
+            workItem = DispatchWorkItem(block: {
+                guard let dispatchWorkItem = workItem, !dispatchWorkItem.isCancelled else {
+                    workItem = nil
+                    return
                 }
+
+                guard let data = try? Data(contentsOf: url) else {
+                    self.postImageView.image = #imageLiteral(resourceName: "placeholder")
+                    return
+                }
+                RedditAPI.shared.cache.setObject(data as NSData, forKey: urlString as NSString)
+                let image = UIImage(data: data)
+                if let workItem = workItem, !workItem.isCancelled {
+                    DispatchQueue.main.async {
+                        // Configure Thumbnail Image View
+                        self.postImageView.image = image
+                    }
+                }
+            })
+
+            if let workItem = workItem {
+                DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: workItem)
+
+                fetchDataWorkItem = workItem
             }
-        })
 
-        if let workItem = workItem {
-            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: workItem)
-
-            fetchDataWorkItem = workItem
-        }
-
-        // Clean Up
-        workItem?.notify(queue: .main) {
-            workItem = nil
+            // Clean Up
+            workItem?.notify(queue: .main) {
+                workItem = nil
+            }
         }
     }
 
@@ -74,7 +81,7 @@ class RedditPostTableViewCell: UITableViewCell {
         super.prepareForReuse()
         fetchDataWorkItem?.cancel()
 
-        postImageView.image = nil
+        postImageView.image = #imageLiteral(resourceName: "placeholder")
     }
     
 }

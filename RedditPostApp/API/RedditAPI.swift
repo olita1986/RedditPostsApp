@@ -12,6 +12,8 @@ class RedditAPI: RedditAPIService {
     let client: Client
     var token: String = ""
 
+    let cache = NSCache<NSString, NSData>()
+
     static let shared = RedditAPI()
 
     private init(client: Client = UrlSessionClient()) {
