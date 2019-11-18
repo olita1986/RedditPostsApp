@@ -25,11 +25,18 @@ class PostsInteractor: PostsBusinessLogic, PostsDataStore {
 
     var nextPageId = ""
     var isFetchingPosts = false
+    var isFirstTimeFetching = true
 
     func getPosts() {
+        if !isFirstTimeFetching {
+            if nextPageId.isEmpty {
+                return
+            }
+        }
         guard !isFetchingPosts else {
             return
         }
+        isFirstTimeFetching = false
         isFetchingPosts = true
         worker.getPost(nextPageId: nextPageId) { [weak self] result in
             self?.isFetchingPosts = false
