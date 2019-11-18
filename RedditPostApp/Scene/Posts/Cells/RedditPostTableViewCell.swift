@@ -35,6 +35,7 @@ class RedditPostTableViewCell: UITableViewCell {
 
 
     private func downloadImage(withURL urlString: String) {
+        postImageView.image = #imageLiteral(resourceName: "placeholder")
         if let data = RedditAPI.shared.cache.object(forKey: urlString as NSString) {
             let image = UIImage(data: data as Data)
             postImageView.image = image
