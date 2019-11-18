@@ -13,9 +13,29 @@
 import UIKit
 
 protocol WelcomePresentationLogic {
+    func presentPosts()
+    func presentError()
+    func presentLoading()
+    func dismissLoading()
 }
 
 class WelcomePresenter: WelcomePresentationLogic {
     weak var viewController: WelcomeDisplayLogic?
+
+    func presentPosts() {
+        viewController?.displayPosts()
+    }
+
+    func presentError() {
+        viewController?.displayError()
+    }
+
+    func presentLoading() {
+        viewController?.displayLoading()
+    }
+
+    func dismissLoading() {
+        viewController?.hideLoading()
+    }
 
 }

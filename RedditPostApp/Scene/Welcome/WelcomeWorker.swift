@@ -20,5 +20,7 @@ class WelcomeWorker {
         self.apiService = apiService
     }
 
-    
+    func login(completion: @escaping (Result<Void, RedditError>) -> Void) {
+        apiService.getToken(completion: completion)
+    }
 }

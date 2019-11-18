@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol WelcomeRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToPosts()
 }
 
 protocol WelcomeDataPassing {
@@ -24,34 +24,15 @@ class WelcomeRouter: NSObject, WelcomeRoutingLogic, WelcomeDataPassing {
     weak var viewController: WelcomeViewController?
     var dataStore: WelcomeDataStore?
 
+    let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-
-    // MARK: Navigation
-
-    //func navigateToSomewhere(source: WelcomeViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
-
-    // MARK: Passing data
-
-    //func passDataToSomewhere(source: WelcomeDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func routeToPosts() {
+        let destinationVC = mainStoryBoard.instantiateViewController(withIdentifier: "PostsViewController") as! PostsViewController
+        viewController?.navigationController?.pushViewController(
+            destinationVC,
+            animated: true
+        )
+    }
 }

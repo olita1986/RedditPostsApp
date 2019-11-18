@@ -13,6 +13,10 @@
 import UIKit
 
 protocol WelcomeDisplayLogic: class {
+    func displayPosts()
+    func displayError()
+    func displayLoading()
+    func hideLoading()
 }
 
 class WelcomeViewController: UIViewController, WelcomeDisplayLogic {
@@ -51,5 +55,35 @@ class WelcomeViewController: UIViewController, WelcomeDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+    }
+
+    // MARK: Helper Methods
+
+    @IBAction func loginButtonWasPressed(_ sender: Any) {
+        interactor?.login()
+    }
+
+
+    func setupViews() {
+        title = "Login"
+    }
+
+    // MARK: VIP Methods
+
+    func displayPosts() {
+        router?.routeToPosts()
+    }
+
+    func displayError() {
+        loginButton.setTitle("Try Again", for: .normal)
+    }
+
+    func displayLoading() {
+        loginButton.setTitle("Loading...", for: .normal)
+    }
+
+    func hideLoading() {
+        loginButton.setTitle("Login", for: .normal)
     }
 }
