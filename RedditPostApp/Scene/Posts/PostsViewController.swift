@@ -14,6 +14,7 @@ import UIKit
 
 protocol PostsDisplayLogic: class {
     func displayView(viewModel: Posts.RedditPosts.ViewModel)
+    func removePost(id: String)
 }
 
 class PostsViewController: UIViewController, PostsDisplayLogic {
@@ -109,6 +110,19 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
         redditPosts += viewModel.redditPosts
     }
 
+    func removePost(id: String) {
+        let deletedUserIndex = redditPosts.firstIndex{
+            $0.id == id
+        }
+        guard let index = deletedUserIndex else { return }
+
+        let indexPath = IndexPath(row: index, section: 0)
+        postsTableView.beginUpdates()
+        redditPosts.remove(at: index)
+        postsTableView.deleteRows(at: [indexPath], with: .fade)
+        postsTableView.endUpdates()
+    }
+
 }
 
 extension PostsViewController: UITableViewDataSource, UITableViewDataSourcePrefetching {
@@ -127,7 +141,9 @@ extension PostsViewController: UITableViewDataSource, UITableViewDataSourcePrefe
         let post = redditPosts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! RedditPostTableViewCell
 
-        cell.setupCell(viewModel: post)
+        cell.setupCell(viewModel: post, action: { [weak self] id in
+            self?.interactor?.removePost(id: id)
+        })
         return cell
     }
 

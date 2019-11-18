@@ -17,25 +17,40 @@ class RedditPostTableViewCell: UITableViewCell {
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var commentsLabel: UILabel!
 
+    private var id: String = ""
+
+    private var action: ((String) -> Void)?
+
     private weak var fetchDataWorkItem: DispatchWorkItem?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
+        dismissButton.addTarget(self, action: #selector(buttonWasPressed), for: .touchUpInside)
     }
 
-    func setupCell(viewModel: Posts.RedditPosts.ViewModel.DisplayedRedditPost) {
+    func setupCell(viewModel: Posts.RedditPosts.ViewModel.DisplayedRedditPost, action: @escaping ((String) -> Void)) {
         authorLabel.text = viewModel.author
         createdLabel.text = viewModel.created
         titleLabel.text = viewModel.title
         commentsLabel.text = viewModel.commentCount
+        self.id = viewModel.id
+        self.action = action
         downloadImage(withURL: viewModel.thumbnailURL)
     }
 
+    @objc
+    private func buttonWasPressed() {
+        action?(id)
+    }
 
-    private func downloadImage(withURL urlString: String) {
-        postImageView.image = #imageLiteral(resourceName: "placeholder")
+
+    private func downloadImage(withURL string: String?) {
+        guard let urlString = string else {
+            postImageView.image = #imageLiteral(resourceName: "placeholder")
+            return
+        }
         if let data = RedditAPI.shared.cache.object(forKey: urlString as NSString) {
             let image = UIImage(data: data as Data)
             postImageView.image = image

@@ -14,6 +14,7 @@ import UIKit
 
 protocol PostsBusinessLogic {
     func getPosts()
+    func removePost(id: String)
 }
 
 protocol PostsDataStore {
@@ -60,5 +61,9 @@ class PostsInteractor: PostsBusinessLogic, PostsDataStore {
                 print(error.localizedDescription)
             }
         }
+    }
+
+    func removePost(id: String) {
+        presenter?.removePost(id: id)
     }
 }

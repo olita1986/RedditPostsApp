@@ -14,6 +14,7 @@ import UIKit
 
 protocol PostsPresentationLogic {
     func presentView(response: Posts.RedditPosts.Response)
+    func removePost(id: String)
 }
 
 class PostsPresenter: PostsPresentationLogic {
@@ -22,9 +23,10 @@ class PostsPresenter: PostsPresentationLogic {
     func presentView(response: Posts.RedditPosts.Response) {
         let posts = response.rawPosts.map {
             Posts.RedditPosts.ViewModel.DisplayedRedditPost(
+                id: $0.id,
                 author: $0.author,
                 created: "",
-                thumbnailURL: $0.url,
+                thumbnailURL: $0.url == "default" ? nil : $0.url,
                 title: $0.title,
                 commentCount: "\($0.numComments) comment\($0.numComments > 1 ? "s" : "")"
             )
@@ -34,5 +36,9 @@ class PostsPresenter: PostsPresentationLogic {
             loadingCount: response.showLoadingRow ? 1 : 0
         )
         viewController?.displayView(viewModel: viewModel)
+    }
+
+    func removePost(id: String) {
+        viewController?.removePost(id: id)
     }
 }

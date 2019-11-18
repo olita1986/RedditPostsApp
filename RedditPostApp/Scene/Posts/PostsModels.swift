@@ -25,9 +25,10 @@ enum Posts {
         }
         struct ViewModel {
             struct DisplayedRedditPost {
+                let id: String
                 let author: String
                 let created: String
-                let thumbnailURL: String
+                let thumbnailURL: String?
                 let title: String
                 let commentCount: String
             }
