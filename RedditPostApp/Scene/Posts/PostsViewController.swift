@@ -29,7 +29,9 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
     }
 
     var loadingCount = 0
-    
+
+    var refreshControl = UIRefreshControl()
+
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -70,6 +72,7 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
     private func setupViews() {
         title = "Top Posts"
         setupDataTableView()
+        setupRefreshControl()
     }
 
     private func setupDataTableView() {
@@ -82,10 +85,26 @@ class PostsViewController: UIViewController, PostsDisplayLogic {
         postsTableView.rowHeight = UITableView.automaticDimension
     }
 
+    private func setupRefreshControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(
+            self,
+            action: #selector(refresh),
+            for: .valueChanged
+        )
+        postsTableView.addSubview(refreshControl)
+    }
+
+    @objc func refresh() {
+        // Code to refresh table view
+        interactor?.getPosts()
+    }
+
 
     // MARK: VIP methods
 
     func displayView(viewModel: Posts.RedditPosts.ViewModel) {
+        refreshControl.endRefreshing()
         loadingCount = viewModel.loadingCount
         redditPosts += viewModel.redditPosts
     }
